@@ -25,15 +25,19 @@ class Solution {
         root.right=deleteNode(root.right,key);
        }
        else{
+        //leaf node
         if(root.left==null && root.right==null){
             return null;
         }
+        //right child only exists
         if(root.left==null){
 return root.right;
         }
+        //left child only exists
         if(root.right==null){
             return root.left;
         }
+        //both right and left exists: replace the node with inorder successor
         TreeNode successor = root.right;
         while(successor.left!=null){
             successor=successor.left;
