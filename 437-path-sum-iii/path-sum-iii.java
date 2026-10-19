@@ -14,27 +14,34 @@
  * }
  */
 class Solution {
-    int count = 0;
-    public int pathSum(TreeNode root, int targetSum) {
-if(root==null){
-    return 0;
-}
-List<Integer> temp = new ArrayList<>();
-bt(root,(long)targetSum,temp);
-pathSum(root.left,targetSum);
-pathSum(root.right,targetSum);
-return count;
+    int c;
 
+    public int pathSum(TreeNode root, int targetSum) {
+        c = 0;
+        path(root, targetSum);
+        return c;
     }
-    void bt(TreeNode root,long targetSum,List<Integer> temp){
-        if(root==null)return;
-        temp.add(root.val);
-        targetSum-=root.val;
-        if(targetSum==0){
-            count++;
+
+    void path(TreeNode root, long targetSum) {
+        
+        if (root == null) {
+            return;
         }
-        bt(root.left,targetSum,temp);
-        bt(root.right,targetSum,temp);
-        temp.remove(temp.size()-1);
+
+        bt(root, targetSum);
+        path(root.left, targetSum);
+        path(root.right, targetSum);
+    }
+
+    void bt(TreeNode root, long targetSum) {
+        if (root == null) {
+            return;
+        }
+        targetSum -= root.val;
+        if (targetSum == 0) {
+            c++;
+        }
+        bt(root.left, targetSum);
+        bt(root.right, targetSum);
     }
 }
