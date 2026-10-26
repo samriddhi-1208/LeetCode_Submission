@@ -1,21 +1,21 @@
 class Solution {
-    List<List<Integer>> ans = new ArrayList<>();
     public List<List<Integer>> permute(int[] nums) {
-    boolean used[] = new boolean[nums.length];
-    List<Integer> temp = new ArrayList<>();
-    bt(nums,used,temp);
-    return ans;    
+        List<List<Integer>> ans = new ArrayList<>();
+        boolean[] used = new boolean[nums.length];
+        List<Integer> temp = new ArrayList<>();
+        f(ans,temp,nums,used);
+        return ans;
     }
-    public void bt(int[] nums,boolean[] used,List<Integer> temp){
+    public void f(List<List<Integer>> ans,List<Integer> temp,int[] nums,boolean[] used){
         if(temp.size()==nums.length){
             ans.add(new ArrayList<>(temp));
             return;
         }
         for(int i = 0;i<nums.length;i++){
-            if(used[i]) continue;
+            if(used[i])continue;
             used[i]=true;
             temp.add(nums[i]);
-            bt(nums,used,temp);
+            f(ans,temp,nums,used);
             temp.remove(temp.size()-1);
             used[i]=false;
         }
